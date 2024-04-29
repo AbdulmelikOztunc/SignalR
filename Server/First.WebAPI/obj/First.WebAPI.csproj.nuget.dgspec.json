@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\asus\\Downloads\\YMYP1-main\\YMYP1-main\\09.NET\\SignalR\\First.WebAPI\\First.WebAPI.csproj": {}
+    "D:\\projeler\\SignalR\\Server\\First.WebAPI\\First.WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\asus\\Downloads\\YMYP1-main\\YMYP1-main\\09.NET\\SignalR\\First.WebAPI\\First.WebAPI.csproj": {
+    "D:\\projeler\\SignalR\\Server\\First.WebAPI\\First.WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\asus\\Downloads\\YMYP1-main\\YMYP1-main\\09.NET\\SignalR\\First.WebAPI\\First.WebAPI.csproj",
+        "projectUniqueName": "D:\\projeler\\SignalR\\Server\\First.WebAPI\\First.WebAPI.csproj",
         "projectName": "First.WebAPI",
-        "projectPath": "C:\\Users\\asus\\Downloads\\YMYP1-main\\YMYP1-main\\09.NET\\SignalR\\First.WebAPI\\First.WebAPI.csproj",
+        "projectPath": "D:\\projeler\\SignalR\\Server\\First.WebAPI\\First.WebAPI.csproj",
         "packagesPath": "C:\\Users\\asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\asus\\Downloads\\YMYP1-main\\YMYP1-main\\09.NET\\SignalR\\First.WebAPI\\obj\\",
+        "outputPath": "D:\\projeler\\SignalR\\Server\\First.WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\asus\\AppData\\Roaming\\NuGet\\NuGet.Config",

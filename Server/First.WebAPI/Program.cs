@@ -1,4 +1,6 @@
+using DovizTakipServer.WebAPI.Services;
 using First.WebAPI.Hubs;
+using WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,13 +13,13 @@ builder.Services.AddCors(action =>
     .SetIsOriginAllowed(policy => true)
     .AllowCredentials());
 });
-
+builder.Services.AddSingleton<IGroupMessageService, GroupMessageService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSignalR();
-
+builder.Services.AddHostedService<AutoDovizBackgroundService>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

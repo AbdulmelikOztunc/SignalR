@@ -1,18 +1,15 @@
 ﻿using First.WebAPI.DTOs;
 using Microsoft.AspNetCore.SignalR;
+using WebAPI.Services;
 
 namespace First.WebAPI.Hubs;
 
-public sealed class ChatHub : Hub
+public sealed class ChatHub (IGroupMessageService messageService) : Hub
 {
-    public static Dictionary<string,string> Users = new();   
+   
     public static HashSet<Group> GroupUsers = new();   
 
-    public async Task Join(string user)
-    {
-        Users.Add(Context.ConnectionId, user);
-        await Clients.All.SendAsync("users", Users.Select(s=> s.Value).ToList());
-    }
+
 
     public async Task JoinGroup(string groupName, string user)
     {
@@ -20,7 +17,24 @@ public sealed class ChatHub : Hub
         GroupUsers.Add(new (Context.ConnectionId,groupName,user));
         await Clients.Group(groupName).SendAsync("groupUsers", GroupUsers.Where(p=>p.GroupName==groupName).Select(s=>s.UserName));
     }
+    public async Task ListGroup(string groupName)
+    {
+        await Clients.All.SendAsync("groupUsersList", GroupUsers.Where(p => p.GroupName == groupName).Select(s => s.UserName));
+    }
 
+    //public async Task GetGroupMessages(string groupName)
+    //{
+    //    var groupMessages = messageService.GetGroupMessages(groupName);
+    //    //var chatMessages = groupMessages.Select(msg => new Chat { Name = msg.Name, Message = msg.Message }).ToList();
+    //        var chatMessages = groupMessages.Select(msg => new Chat { Name = "DefaultName", Message = "er" }).ToList();
+
+    //        await Clients.Caller.SendAsync("receiveGroupMessages", chatMessages);
+    //}
+    public async Task GetGroupMessages(string groupName)
+    {
+        var groupMessages = messageService.GetGroupMessages(groupName);
+        await Clients.Caller.SendAsync("receiveGroupMessages", groupMessages);
+    }
     public async Task LeaveGroup(string groupName)
     {
         await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
@@ -31,8 +45,7 @@ public sealed class ChatHub : Hub
     }
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
-        Users.Remove(Context.ConnectionId);
-        await Clients. All.SendAsync("users", Users.Select(s => s.Value).ToList());
+        
         var groups= GroupUsers.Where(p=>p.ConnectionId==Context.ConnectionId).ToList();
         foreach (var item in groups)
         {
